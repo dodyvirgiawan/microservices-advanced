@@ -1,4 +1,7 @@
 #### Application Functional Requirements
+
+This is a ticketing application.
+
 - User can list a ticket for an event for sale.
 - Other users can purchase a ticket.
 - Any user can list tickets for sale and purchase tickets.
@@ -59,8 +62,17 @@ For simplicity, we will decompose the requirements into these services:
 - `common NPM modules`: we will create an NPM module that will be reusable across all services.
 - `NATS Streaming Server`: acts as the event bus.
 
+We will use Typescript across all project.
+
 ##### Events
 
 We will communicate asynchronously, therefore these are the events that will be available across all microservices (through an event bus)
 
-- `UserCreated`: 
+- `UserCreated`:
+- `UserUpdated`:
+- `OrderCreated`:
+- `OrderCancelled`:
+- `OrderExpired`:
+- `TicketCreated`:
+- `TicketUpdated`:
+- `ChangeCreated`:
