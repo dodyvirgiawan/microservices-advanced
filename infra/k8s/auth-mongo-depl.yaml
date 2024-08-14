@@ -1,0 +1,35 @@
+# Goal: Create mongodb instance for database in auth (Database per Service pattern)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-mongo-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth-mongo
+  template:
+    metadata:
+      labels:
+        app: auth-mongo
+    spec:
+      containers:
+        - name: auth-mongo
+          image: mongo # pull from dockerhub
+
+---
+
+# Goal: Create mongodb clusterip service
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-mongo-srv
+spec:
+  selector:
+    app: auth-mongo
+  type: ClusterIP
+  ports:
+    - name: db
+      protocol: TCP
+      port: 27017 # default mongo port
+      targetPort: 27017 # default mongo port
